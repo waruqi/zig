@@ -1,0 +1,25 @@
+name: macOS
+
+on:
+  pull_request:
+  push:
+  release:
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: artifact
+        run: |
+          brew install cmake llvm
+          brew outdated llvm || brew upgrade llvm
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_PREFIX_PATH=`pwd`/install
+          make install -j4
+          ls -l install
