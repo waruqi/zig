@@ -20,6 +20,6 @@ jobs:
           brew outdated llvm || brew upgrade llvm
           mkdir build
           cd build
-          cmake .. -DCMAKE_PREFIX_PATH=`pwd`/install
+          cmake .. -DCMAKE_INSTALL_PREFIX=`pwd`/install -DCMAKE_PREFIX_PATH=$(brew --prefix llvm)
           make install -j4
           ls -l install
