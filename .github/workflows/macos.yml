@@ -20,6 +20,9 @@ jobs:
           brew outdated llvm || brew upgrade llvm
           mkdir build
           cd build
-          cmake .. -DCMAKE_INSTALL_PREFIX=`pwd`/install -DCMAKE_PREFIX_PATH=$(brew --prefix llvm)
+          cmake .. -DCMAKE_INSTALL_PREFIX=`pwd`/artifacts -DCMAKE_PREFIX_PATH=$(brew --prefix llvm)
           make install -j4
-          ls -l install
+      - uses: actions/upload-artifact@v2
+        with:
+          name: zig-latest-macOS
+          path: artifacts
